@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Production_Plan.ProductionGoals>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Edited Data</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("projectParameters", "ProjectParameters", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.target)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.product)
+                </t
+                <th>
+                    @Html.DisplayNameFor(model => model.production)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.rush)
+                </th>h>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @using (Html.BeginForm("projectParameters", "ProjectParameters", FormMethod.Post))
+                {
+
+                    <td>@Html.EditorFor(modelItem => item.productid)</td>
+
+                   
+                    <td>@Html.EditorFor(modelItem => item.target)</td>
+                    @*   <td>
+                            @Html.DisplayFor(modelItem => item.product)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.production)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rush)
+                        </td>*@
+
+                    <td>
+                        <input type="submit" value="Confirmed" onclick="location.href='@Url.Action("Index","ProjectParameters" )'" />
+                    </td>
+                }
+            </tr>
+
+        }
+
+    </table>
+}
+
+

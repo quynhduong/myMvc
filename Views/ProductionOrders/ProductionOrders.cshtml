@@ -1,0 +1,101 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Production_Plan.ProductionOrders>
+
+@{
+    ViewBag.Title = "ProductionOrders";
+}
+
+<h2>ProductionOrders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lotsize)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lotsize)
+            </td>
+            <td>
+                <input type="submit" value="Get Body" onclick="location.href='@Url.Action("Mining", "Mining")'" />
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div align="center">
+    <br />
+    <input type="button" id="btnSend" value="Send" />
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#btnSend').click(function () {
+            var MinigParams =
+            {
+                goals: [
+                    {
+                        product: 'Brown Teddy Bear',
+                        production: 20,
+                        completed: 3,
+                        rush: false
+                    },
+                    {
+                        product: 'White Teddy Bear',
+                        production: 20,
+                        completed: 3,
+                        rush: false
+                    }
+                ],
+                iniplans: [
+                    {
+                        product: 'Brown Teddy Bear',
+                        lotsize: 20,
+                        islot: true
+                    },
+                    {
+                        product: 'White Teddy Bear',
+                        lotsize: 20,
+                        islot: true
+                    }
+                ],
+                patternCondition: {
+                    RenderingType: 0,
+                    patterns: [
+                        [1, 2]
+                    ]
+                }
+            }
+            $.ajax
+                ({
+                    type = "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{MiningParams:" + JSON.stringify(MinigParams) + "}",
+                    url: "/Ming/Ming",
+                    success: function (data) {
+                        alert("product:" + data);
+                    },
+                    error: function (result) {
+                        alert("Something Went Wrong");
+                    }
+                })
+        })
+    })
+</script>

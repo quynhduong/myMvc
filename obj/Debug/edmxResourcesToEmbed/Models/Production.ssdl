@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProductionModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Production.dbo.Goals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="productid" />
+      <PropertyRef Name="target" />
+      <PropertyRef Name="IsDeleted" />
+    </Key>
+    <Property Name="productid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="target" Type="int" Nullable="false" />
+    <Property Name="Production" Type="int" />
+    <Property Name="Product" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="productid" />
+    </Key>
+    <Property Name="productid" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lotsize" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ProductionModel1StoreContainer">
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goals" EntityType="Self.Goals" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Goals].[productid] AS [productid], 
+    [Goals].[target] AS [target], 
+    [Goals].[Production] AS [Production], 
+    [Goals].[Product] AS [Product], 
+    [Goals].[IsDeleted] AS [IsDeleted]
+    FROM [dbo].[Goals] AS [Goals]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.LoggedInUserModel>
+@{
+    ViewBag.Title = "Home Page";
+    if (Session["userName"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+@{
+    ViewBag.Title = "ProjectList";
+}
+
+<h2>ProjectList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.name) and
+
+            @Html.DisplayNameFor(model => model.ID)
+
+        </th>
+        <th></th>
+    </tr>
+   @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <label>Name:</label>
+            @Html.DisplayFor(modelItem => item.name)_
+            <label>ID:</label>
+            @Html.DisplayFor(modelItem => item.ID)
+
+
+        </td>
+        <td>
+            @using (Html.BeginForm("detail", "Project", FormMethod.Post))
+            {
+                @Html.CheckBox("Example")
+                <input type="submit" value="Show Details" />
+                <input id="ID" name="ID" type="hidden" value="@item.ID" />
+            }
+
+
+
+        </td>
+    </tr>
+    }
+
+</table>
+

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Details.Layout>
+
+@{
+    ViewBag.Title = "layouts";
+}
+
+<h2>layouts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.parentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.moduleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cellSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.selected)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.parentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.moduleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cellSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.selected)
+        </td>
+        <td>
+            <input type="submit" value="Station Info" onclick="location.href='@Url.Action("stations", "Stations")'" />
+            <input type="submit" value="Parent Port" onclick="location.href='@Url.Action("parentPort", "ParentPort")'" />
+            <input type="submit" value="Agent" onclick="location.href='@Url.Action("agent", "Agent")'" />
+        </td>
+    </tr>
+}
+
+</table>

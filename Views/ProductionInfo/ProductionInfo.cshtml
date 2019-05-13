@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Production_Plan.ProductionGoals>
+
+@{
+    ViewBag.Title = "ProductionInfo";
+}
+
+<h2>ProductionInfo</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.target)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.target)
+        </td>
+      
+        <td>
+            <input type="submit" value="Production Orders" onclick="location.href='@Url.Action("ProductionOrders", "ProductionOrders")'" />
+            <input type="submit" value="Add Goal" onclick="location.href='@Url.Action("Index","AddOrder" )'" />
+
+       
+        </td>
+    </tr>
+}
+
+</table>

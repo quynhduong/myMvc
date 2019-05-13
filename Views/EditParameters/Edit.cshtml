@@ -1,0 +1,95 @@
+﻿@using Newtonsoft.Json;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Net.Http;
+@using System.Net.Http.Headers;
+@using System.Threading.Tasks;
+@using System.Web;
+@using System.Web.Mvc;
+@using TRMDesktopUserI.Library.Models.Production_Plan;
+@model IEnumerable<TRMDesktopUserI.Library.Models.Production_Plan.ProductionGoals>
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Edit Data</title>
+
+</head>
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Edit", "EditParameters", FormMethod.Post))
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("https://www.gdfindi.com:442/api/");
+            string token = (string)Session["Access_Token"];
+
+            //Define Headers
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync("v1/Projects/" + Session["id"].ToString() + "/parameters").Result;
+
+            var ProductInfo = response.Content.ReadAsAsync<ProductionPlan>().Result;
+
+            Productions productions = new Productions();
+            List<Productions> productionsList = new List<Productions>(ProductInfo.productions);
+            if (productionsList.Count != 0)
+            {
+                foreach (var i in productionsList)
+                {
+                    productions.production_goals = i.production_goals;
+                    productionsList.Add(productions);
+                    List<ProductionGoals> productionGoalsList = new List<ProductionGoals>(i.production_goals);
+                    if (productionGoalsList != null)
+                    {
+                        ProductionGoals productionGoals = new ProductionGoals();
+                        productionGoalsList.Add(productionGoals);
+
+                        <table>
+                            <tr>
+                                <td></td>
+
+                            </tr>
+                            @foreach (var item in productionGoalsList)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => item.productid)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(model => item.productid)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>@Html.LabelFor(model => item.target)</td>
+                                    <td>@Html.EditorFor(model => item.target)</td>
+                                </tr>
+
+
+
+                            }
+
+                        </table>
+                    }
+                }
+            }
+         }
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <input type="submit" value="Production Process" onclick="location.href='@Url.Action("Edit", "EditParameters")'" />
+
+
+</body>
+</html>

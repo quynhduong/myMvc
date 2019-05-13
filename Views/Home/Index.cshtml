@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    if(Session["userName"]==null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>GD.FINDI HOME PAGE</h1>
+        @if(Session["userName"] != null)
+        { 
+        <h3>Username : @Session["userName"].ToString()</h3>
+        <a href="@Url.Action("LogOut","Login")">LogOut</a>
+       @* <h4> : @Session["Access_Token"].ToString()</h4>*@
+        <a href="@Url.Action("ProjectList","Project")">Projects</a>
+        }
+     
+    </div>
+</body>
+</html>

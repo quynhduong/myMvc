@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Production_Plan.MiningMode>
+
+@{
+    ViewBag.Title = "Mining";
+}
+
+<h2>Mining</h2>
+
+
+
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<div align="center">
+    <br />
+    <input type="button" id="btnSend" value="Send" />
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#btnSend').click(function () {
+            var MinigParams =
+            {
+                goals: [
+                    {
+                        product: 'Brown Teddy Bear',
+                        production: 20,
+                        completed: 3,
+                        rush: false
+                    },
+                    {
+                        product: 'White Teddy Bear',
+                        production: 20,
+                        completed: 3,
+                        rush: false
+                    }
+                ],
+                iniplans: [
+                    {
+                        product: 'Brown Teddy Bear',
+                        lotsize: 20,
+                        islot: true
+                    },
+                    {
+                        product: 'White Teddy Bear',
+                        lotsize: 20,
+                        islot: true
+                    }
+                ],
+                patternCondition: {
+                    RenderingType: 0,
+                    patterns: [
+                        [1, 2]
+                    ]
+                }
+            }
+               $.ajax
+                ({
+                    type = "POST",
+                    contentType: "application/json; charset=utf-8",
+                       data: "{MiningParams:" + JSON.stringify(MinigParams) + "}",
+                       url: "/Mining/Mining",
+                       success: function (data)
+                       {
+                           alert("MiningParams:" + data);
+                       },
+                       error: function (result) {
+                           alert("Something Went Wrong");
+                       }
+                 })
+        })
+    })
+ </script>

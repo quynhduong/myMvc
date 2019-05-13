@@ -1,0 +1,87 @@
+﻿@model IEnumerable<TRMDesktopUserI.Library.Models.Details.Process>
+
+@{
+    ViewBag.Title = "process";
+}
+
+<h2>process</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.x)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.y)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.worktime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.setup)
+        </th>
+        @*  <th>
+            @Html.DisplayNameFor(model => model.frequency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inputProcess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.outputProcess)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.disabled)
+        </th>
+        <th></th>
+    </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.x)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.y)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.worktime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.setup)
+                </td>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.frequency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inputProcess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.outputProcess)
+                </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.disabled)
+        </td>
+        <td>
+            <input type="submit" value="Product" onclick="location.href='@Url.Action("products", "Products")'" />
+            <input type="submit" value="Output" onclick="location.href='@Url.Action("output", "Output")'" />
+            <input type="submit" value="Input" onclick="location.href='@Url.Action("input", "Input")'" />
+        </td>
+    </tr>
+}
+
+</table>
